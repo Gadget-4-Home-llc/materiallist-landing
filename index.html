@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gadget 4 Home LLC — Material List: Easy Estimates & Invoices</title>
+<meta name="description" content="Material List Chrome Extension — Create professional estimates and invoices in seconds. Capture prices from 20+ stores, AI labor suggestions, and client management.">
+<meta name="keywords" content="Electrical Estimating Software, Contractor Material List, Construction Estimates, Chrome Extension, Invoice Generator, Estimate Builder">
+<meta name="author" content="Gadget 4 Home LLC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-primary: #020617;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #1e293b;
+  --accent: #3b82f6;
+  --accent-glow: rgba(59, 130, 246, 0.4);
+  --accent-subtle: rgba(59, 130, 246, 0.1);
+  --amber: #f59e0b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.15);
+  --success: #22c55e;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAVBAR ─────────────────────────────── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 16px 0; transition: all 0.3s;
+}
+.nav.scrolled {
+  background: rgba(2, 6, 23, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1200px; margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px; font-weight: 700; color: var(--text-primary);
+  text-decoration: none;
+}
+.nav-logo-icon {
+  width: 36px; height: 36px; background: linear-gradient(135deg, var(--accent), #60a5fa);
+  border-radius: 10px; display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.nav-links { display: flex; gap: 32px; align-items: center; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none; font-size: 14px;
+  font-weight: 500; transition: color 0.2s; letter-spacing: 0.3px;
+}
+.nav-links a:hover { color: var(--text-primary); }
+.nav-cta {
+  padding: 8px 20px; background: var(--accent); color: #fff !important; border-radius: 8px;
+  font-weight: 600; font-size: 13px; text-decoration: none; transition: all 0.2s;
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+.nav-cta:hover { background: #2563eb; transform: translateY(-1px); }
+.nav-menu-btn {
+  display: none; background: none; border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 12px; color: var(--text-primary); cursor: pointer; font-size: 18px;
+}
+
+/* ── HERO ───────────────────────────────── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  position: relative; padding: 120px 24px 80px;
+}
+.hero-bg {
+  position: absolute; inset: 0; overflow: hidden; z-index: 0;
+}
+.hero-bg::before {
+  content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(59,130,246,0.12) 0%, transparent 70%);
+}
+.hero-bg::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+  background: linear-gradient(to top, var(--bg-primary), transparent);
+}
+.hero-content {
+  max-width: 800px; text-align: center; position: relative; z-index: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; background: var(--accent-subtle);
+  border: 1px solid rgba(59,130,246,0.2); border-radius: 100px;
+  font-size: 12px; font-weight: 600; color: var(--accent); margin-bottom: 24px;
+  letter-spacing: 0.5px;
+}
+.hero-badge-dot { width: 6px; height: 6px; background: var(--accent); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+.hero h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(36px, 6vw, 64px); font-weight: 700;
+  line-height: 1.1; margin-bottom: 20px; letter-spacing: -1px;
+}
+.hero h1 .accent { color: var(--accent); }
+.hero-sub {
+  font-size: 18px; color: var(--text-secondary); max-width: 560px;
+  margin: 0 auto 36px; line-height: 1.7;
+}
+.hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  padding: 14px 32px; background: var(--accent); color: #fff; border: none;
+  border-radius: 10px; font-size: 15px; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: all 0.2s; text-decoration: none;
+  box-shadow: 0 0 30px var(--accent-glow); display: inline-block;
+}
+.btn-primary:hover { background: #2563eb; transform: translateY(-2px); }
+.btn-outline {
+  padding: 14px 32px; background: transparent; color: var(--text-primary);
+  border: 1px solid var(--border); border-radius: 10px; font-size: 15px;
+  font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s;
+  text-decoration: none; display: inline-block;
+}
+.btn-outline:hover { border-color: var(--border-hover); background: rgba(255,255,255,0.03); }
+
+/* ── SECTIONS ───────────────────────────── */
+.section { padding: 100px 24px; }
+.section-inner { max-width: 1200px; margin: 0 auto; }
+.section-label {
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  text-transform: uppercase; letter-spacing: 2px; margin-bottom: 12px;
+}
+.section-title {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: clamp(28px, 4vw, 44px); font-weight: 700;
+  line-height: 1.2; margin-bottom: 16px; letter-spacing: -0.5px;
+}
+.section-desc {
+  font-size: 16px; color: var(--text-secondary); max-width: 600px; line-height: 1.7;
+}
+
+/* ── FEATURE SECTION ────────────────────── */
+.feature-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  align-items: center; margin-top: 60px;
+}
+.feature-visual {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 16px; padding: 40px; position: relative; overflow: hidden;
+}
+.feature-visual::before {
+  content: ''; position: absolute; top: -50%; right: -50%;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(59,130,246,0.08) 0%, transparent 70%);
+}
+.feature-mockup {
+  background: #111827; border-radius: 12px; padding: 20px;
+  border: 1px solid rgba(255,255,255,0.05); position: relative; z-index: 1;
+}
+.mockup-header {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 16px;
+  padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.mockup-dot { width: 8px; height: 8px; border-radius: 50%; }
+.mockup-bar {
+  height: 8px; border-radius: 4px; background: rgba(255,255,255,0.06);
+  margin-bottom: 8px;
+}
+.mockup-bar.short { width: 60%; }
+.mockup-bar.accent { background: rgba(59,130,246,0.3); width: 100%; }
+.mockup-bar.amber { background: rgba(245,158,11,0.3); width: 100%; }
+
+.feature-badges { display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap; }
+.badge {
+  padding: 6px 14px; border-radius: 100px; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.badge-chrome { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); color: var(--accent); }
+.badge-ai { background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); color: #a78bfa; }
+
+.feature-list { margin-top: 28px; }
+.feature-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.feature-item:last-child { border-bottom: none; }
+.feature-check {
+  width: 20px; height: 20px; background: rgba(34,197,94,0.1);
+  border: 1px solid rgba(34,197,94,0.2); border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; flex-shrink: 0; margin-top: 2px; color: var(--success);
+}
+.feature-item-text { font-size: 14px; color: var(--text-secondary); }
+.feature-item-text strong { color: var(--text-primary); font-weight: 600; }
+
+/* ── STORE LOGOS ─────────────────────────── */
+.store-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  margin-top: 40px;
+}
+.store-card {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; text-align: center;
+  transition: all 0.3s; cursor: default;
+}
+.store-card:hover {
+  border-color: var(--border-hover);
+  background: rgba(15, 23, 42, 0.8);
+  transform: translateY(-2px);
+}
+.store-name {
+  font-size: 13px; font-weight: 600; color: var(--text-secondary);
+  transition: color 0.3s;
+}
+.store-card:hover .store-name { color: var(--text-primary); }
+.store-icon {
+  font-size: 24px; margin-bottom: 8px; opacity: 0.5;
+  transition: opacity 0.3s;
+}
+.store-card:hover .store-icon { opacity: 1; }
+
+/* ── PRICING ────────────────────────────── */
+.pricing-section { background: var(--bg-secondary); }
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  margin-top: 48px;
+}
+.pricing-card {
+  background: var(--bg-primary); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px; text-align: center;
+  transition: all 0.3s; position: relative;
+}
+.pricing-card.featured {
+  border-color: var(--accent);
+  box-shadow: 0 0 40px rgba(59,130,246,0.15);
+}
+.pricing-card.featured::before {
+  content: 'MOST POPULAR'; position: absolute; top: -12px; left: 50%;
+  transform: translateX(-50%); background: var(--accent); color: #fff;
+  padding: 4px 16px; border-radius: 100px; font-size: 10px;
+  font-weight: 700; letter-spacing: 1px;
+}
+.pricing-name {
+  font-size: 14px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--text-muted); margin-bottom: 12px;
+}
+.pricing-price {
+  font-family: 'Space Grotesk', sans-serif; font-size: 40px;
+  font-weight: 700; color: var(--text-primary); margin-bottom: 4px;
+}
+.pricing-period { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+.pricing-equiv { font-size: 12px; color: var(--success); font-weight: 600; margin-bottom: 20px; }
+.pricing-btn {
+  display: block; width: 100%; padding: 12px; border-radius: 10px;
+  font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+  transition: all 0.2s; text-decoration: none; text-align: center;
+}
+.pricing-btn-primary {
+  background: var(--accent); color: #fff; border: none;
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+.pricing-btn-primary:hover { background: #2563eb; }
+.pricing-btn-outline {
+  background: transparent; color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+.pricing-btn-outline:hover { border-color: var(--border-hover); }
+
+/* ── CONTACT ────────────────────────────── */
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  margin-top: 48px; align-items: start;
+}
+.contact-form {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px;
+}
+.form-group { margin-bottom: 16px; }
+.form-label {
+  display: block; font-size: 12px; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;
+}
+.form-input, .form-textarea {
+  width: 100%; padding: 12px 16px; background: var(--bg-primary);
+  border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text-primary); font-family: inherit; font-size: 14px;
+  outline: none; transition: border-color 0.2s;
+}
+.form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+.form-textarea { resize: none; height: 120px; }
+.form-submit {
+  width: 100%; padding: 14px; background: var(--accent); color: #fff;
+  border: none; border-radius: 10px; font-size: 15px; font-weight: 600;
+  cursor: pointer; font-family: inherit; transition: all 0.2s;
+}
+.form-submit:hover { background: #2563eb; }
+.contact-info-card {
+  background: var(--bg-secondary); border: 1px solid var(--border);
+  border-radius: 16px; padding: 32px; margin-bottom: 16px;
+}
+.contact-info-title { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 12px; }
+.contact-info-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 0; font-size: 14px; color: var(--text-secondary);
+}
+.contact-info-icon { font-size: 16px; width: 24px; text-align: center; }
+
+/* ── LEGAL PAGES ────────────────────────── */
+.legal-page {
+  display: none; min-height: 100vh; padding: 120px 24px 80px;
+}
+.legal-page.active { display: block; }
+.legal-content { max-width: 800px; margin: 0 auto; }
+.legal-content h1 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 36px;
+  font-weight: 700; margin-bottom: 8px;
+}
+.legal-content .legal-date { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
+.legal-content h2 {
+  font-family: 'Space Grotesk', sans-serif; font-size: 20px;
+  font-weight: 600; margin-top: 32px; margin-bottom: 12px; color: var(--accent);
+}
+.legal-content p {
+  font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px;
+}
+.legal-content ul {
+  margin: 0 0 16px 20px; color: var(--text-secondary); font-size: 15px; line-height: 1.8;
+}
+.legal-back {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--accent); text-decoration: none; font-size: 14px;
+  font-weight: 600; margin-bottom: 24px;
+}
+.legal-back:hover { text-decoration: underline; }
+
+/* ── FOOTER ─────────────────────────────── */
+.footer {
+  border-top: 1px solid var(--border); padding: 48px 24px;
+  background: var(--bg-secondary);
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px;
+}
+.footer-brand { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 12px; }
+.footer-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; max-width: 280px; }
+.footer-col-title {
+  font-size: 12px; font-weight: 600; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;
+}
+.footer-link {
+  display: block; color: var(--text-secondary); text-decoration: none;
+  font-size: 14px; padding: 4px 0; transition: color 0.2s;
+}
+.footer-link:hover { color: var(--text-primary); }
+.footer-bottom {
+  max-width: 1200px; margin: 32px auto 0; padding-top: 24px;
+  border-top: 1px solid var(--border); text-align: center;
+}
+.footer-copy { font-size: 12px; color: var(--text-muted); line-height: 1.7; }
+.footer-affiliate {
+  font-size: 11px; color: var(--text-muted); margin-top: 12px;
+  line-height: 1.6; max-width: 700px; margin-left: auto; margin-right: auto;
+  opacity: 0.7;
+}
+
+/* ── RESPONSIVE ─────────────────────────── */
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-menu-btn { display: block; }
+  .feature-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+  .store-grid { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin-left: auto; margin-right: auto; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .hero { padding: 100px 20px 60px; }
+  .section { padding: 60px 20px; }
+}
+@media (max-width: 480px) {
+  .store-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .footer-inner { grid-template-columns: 1fr; }
+}
+
+/* ── ANIMATIONS ─────────────────────────── */
+.fade-in {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* ── CARRUSEL ───────────────────────────── */
+.feature-carousel { width:100%; }
+.carousel-viewport {
+  overflow: hidden; border-radius: 12px;
+  background: rgba(15,23,42,0.6); border: 1px solid rgba(255,255,255,0.06);
+}
+.carousel-track {
+  display: flex; transition: transform 0.4s ease;
+}
+.carousel-slide {
+  min-width: 100%; flex-shrink: 0;
+}
+.carousel-controls {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; margin-top: 14px;
+}
+.carousel-btn {
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary); border-radius: 50%; width: 32px; height: 32px;
+  cursor: pointer; font-size: 14px; transition: background 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.carousel-btn:hover { background: rgba(245,158,11,0.15); color: #f59e0b; }
+.carousel-dots { display: flex; gap: 8px; }
+.carousel-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.2); cursor: pointer; transition: background 0.2s;
+}
+.carousel-dot.active { background: #f59e0b; }
+
+/* ── DISCOUNT CODES ─────────────────────── */
+.discount-section { background: rgba(245,158,11,0.04); border-top: 1px solid rgba(245,158,11,0.1); }
+.discount-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px; margin-top: 32px;
+}
+.discount-card {
+  background: rgba(15,23,42,0.7); border: 1px solid rgba(245,158,11,0.18);
+  border-radius: 14px; padding: 24px 20px; text-align: center;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.discount-card:hover { border-color: rgba(245,158,11,0.5); transform: translateY(-2px); }
+.discount-label {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--text-muted); margin-bottom: 10px;
+}
+.discount-code {
+  font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700;
+  color: #f59e0b; letter-spacing: 3px; margin-bottom: 8px;
+  background: rgba(245,158,11,0.08); border: 1px dashed rgba(245,158,11,0.3);
+  border-radius: 8px; padding: 10px 16px; display: inline-block; cursor: pointer;
+  user-select: all; transition: background 0.2s;
+}
+.discount-code:hover { background: rgba(245,158,11,0.15); }
+.discount-desc { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; }
+.discount-copy-hint { font-size: 11px; color: var(--text-muted); }
+.discount-copied { color: #4ade80 !important; }
+</style>
+</head>
+<body>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" onclick="showMain()">
+      <!-- ════ ICONO LOGO NAV ════
+           Pon tu imagen en:  assets/icon/logo.png
+           Se mostrará automáticamente. Si no existe el archivo,
+           se muestra el emoji ⚡ como respaldo.
+           ═══════════════════════════════ -->
+      <div class="nav-logo-icon" style="overflow:hidden;padding:0">
+        <img src="assets/icon/LOGO.png" alt="Gadget 4 Home icon"
+             style="width:36px;height:36px;object-fit:cover;border-radius:10px;display:block"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span style="display:none;width:36px;height:36px;align-items:center;justify-content:center;font-size:18px">&#9889;</span>
+      </div>
+      Gadget 4 Home LLC
+    </a>
+    <div class="nav-links">
+      <a href="#extension" onclick="showMain()">Extension</a>
+      <a href="#pricing" onclick="showMain()">Pricing</a>
+      <a href="#contact" onclick="showMain()">Contact</a>
+      <!-- TODO: Replace # with Chrome Web Store link when approved -->
+      <a href="#extension" class="nav-cta" onclick="showMain()">Get Material List</a>
+    </div>
+    <button class="nav-menu-btn" onclick="toggleMobile()">&#9776;</button>
+  </div>
+</nav>
+
+<!-- ═══ MAIN CONTENT ═══ -->
+<div id="main-content">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content fade-in">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Available on Chrome Web Store
+    </div>
+    <h1>Material List: <span class="accent">Easy Estimates &amp; Invoices</span></h1>
+    <p class="hero-sub">Create professional estimates and invoices in seconds. Capture prices from 20+ stores, get AI labor cost suggestions, and manage your clients — all from your browser.</p>
+    <div class="hero-btns">
+      <!-- TODO: Replace # with Chrome Web Store link when approved -->
+      <a href="#extension" class="btn-primary">Install Free Extension</a>
+      <a href="#pricing" class="btn-outline">View Pricing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXTENSION FEATURES ═══ -->
+<section class="section" id="extension">
+  <div class="section-inner">
+    <div class="section-label">Chrome Extension</div>
+    <div class="section-title">Material List: Easy Estimates &amp; Invoices</div>
+    <div class="section-desc">The all-in-one estimating tool for contractors, electricians, plumbers, and resellers. Capture prices from any website, build professional documents, and manage your business.</div>
+
+    <!-- Features list (ancho completo) -->
+    <div class="feature-grid" style="grid-template-columns:1fr">
+      <div>
+        <div class="feature-badges">
+          <span class="badge badge-chrome">Chrome Web Store</span>
+          <span class="badge badge-ai">AI-ready workflow</span>
+        </div>
+        <div class="feature-list" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:4px 32px">
+          <div class="feature-item">
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-item-text"><strong>One-click price capture</strong> from Amazon, Home Depot, Lowe's, Walmart, Grainger, and 20+ stores</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-item-text"><strong>Right-click any price</strong> on any website to add it to your estimate instantly</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-item-text"><strong>AI labor cost suggestions</strong> — generate instant labor estimates using your own AI tools (ChatGPT), based on your materials and job description</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-item-text"><strong>5 professional templates</strong> for estimates and invoices with your logo and branding</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-item-text"><strong>Cloud sync &amp; client management</strong> — your data follows you across devices</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-item-text"><strong>Mark-up, margins &amp; tax control</strong> — full pricing flexibility on every item</div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-check">&#10003;</div>
+            <div class="feature-item-text"><strong>Print</strong> — send estimates directly to clients in seconds</div>
+          </div>
+        </div>
+        <div style="margin-top:28px">
+          <!-- TODO: Replace # with Chrome Web Store link when approved -->
+          <a href="#" class="btn-primary">Install Material List Free</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ CARRUSEL DE SCREENSHOTS — ancho completo ════
+         Tamaño recomendado: cualquier horizontal (16:9, 16:10, etc.)
+         Pon tus archivos en assets/screenshots/
+         ═══════════════════════════════════════════ -->
+    <div style="margin-top:48px">
+      <div class="feature-carousel" id="featureCarousel">
+        <div class="carousel-viewport">
+          <div class="carousel-track" id="carouselTrack">
+
+            <!-- ── IMAGEN 1 ── assets/screenshots/screenshot1.png -->
+            <div class="carousel-slide">
+              <img src="assets/screenshots/Screenshot1.png" alt="Material List — vista de estimado"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                   style="width:100%;border-radius:12px;display:block">
+              <div style="display:none;width:100%;aspect-ratio:16/9;background:rgba(245,158,11,0.07);border:2px dashed rgba(245,158,11,0.25);border-radius:12px;align-items:center;justify-content:center;flex-direction:column;gap:8px">
+                <div style="font-size:40px">&#128247;</div>
+                <div style="font-size:13px;color:var(--text-muted)">screenshot1.png</div>
+              </div>
+            </div>
+
+            <!-- ── IMAGEN 2 ── assets/screenshots/screenshot2.png -->
+            <div class="carousel-slide">
+              <img src="assets/screenshots/Screenshot2.png" alt="Material List — lista de materiales"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                   style="width:100%;border-radius:12px;display:block">
+              <div style="display:none;width:100%;aspect-ratio:16/9;background:rgba(245,158,11,0.07);border:2px dashed rgba(245,158,11,0.25);border-radius:12px;align-items:center;justify-content:center;flex-direction:column;gap:8px">
+                <div style="font-size:40px">&#128247;</div>
+                <div style="font-size:13px;color:var(--text-muted)">screenshot2.png</div>
+              </div>
+            </div>
+
+            <!-- ── IMAGEN 3 ── assets/screenshots/screenshot3.png -->
+            <div class="carousel-slide">
+              <img src="assets/screenshots/Screenshot3.png" alt="Material List — factura generada"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+                   style="width:100%;border-radius:12px;display:block">
+              <div style="display:none;width:100%;aspect-ratio:16/9;background:rgba(245,158,11,0.07);border:2px dashed rgba(245,158,11,0.25);border-radius:12px;align-items:center;justify-content:center;flex-direction:column;gap:8px">
+                <div style="font-size:40px">&#128247;</div>
+                <div style="font-size:13px;color:var(--text-muted)">screenshot3.png</div>
+              </div>
+            </div>
+
+          </div>
+        </div><!-- /carousel-viewport -->
+        <!-- Controles -->
+        <div class="carousel-controls">
+          <button class="carousel-btn" onclick="carouselPrev()" aria-label="Anterior">&#8592;</button>
+          <div class="carousel-dots" id="carouselDots">
+            <span class="carousel-dot active" onclick="carouselGoTo(0)"></span>
+            <span class="carousel-dot" onclick="carouselGoTo(1)"></span>
+            <span class="carousel-dot" onclick="carouselGoTo(2)"></span>
+          </div>
+          <button class="carousel-btn" onclick="carouselNext()" aria-label="Siguiente">&#8594;</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Store Logos -->
+    <div style="margin-top:80px;text-align:center">
+      <div class="section-label">Supported Stores</div>
+      <div class="section-title" style="font-size:24px">Capture Prices From 20+ Retailers</div>
+    </div>
+    <div class="store-grid">
+      <div class="store-card"><div class="store-icon">&#128722;</div><div class="store-name">Amazon</div></div>
+      <div class="store-card"><div class="store-icon">&#127968;</div><div class="store-name">Home Depot</div></div>
+      <div class="store-card"><div class="store-icon">&#128295;</div><div class="store-name">Lowe's</div></div>
+      <div class="store-card"><div class="store-icon">&#128717;</div><div class="store-name">Walmart</div></div>
+      <div class="store-card"><div class="store-icon">&#9889;</div><div class="store-name">Grainger</div></div>
+      <div class="store-card"><div class="store-icon">&#128268;</div><div class="store-name">City Electric</div></div>
+      <div class="store-card"><div class="store-icon">&#128663;</div><div class="store-name">AutoZone</div></div>
+      <div class="store-card"><div class="store-icon">&#128270;</div><div class="store-name">eBay</div></div>
+    </div>
+    <div style="text-align:center;margin-top:16px;font-size:13px;color:var(--text-muted)">+ Ferguson, Fastenal, Zoro, SupplyHouse, O'Reilly, NAPA, MSC Industrial, Graybar, and more</div>
+  </div>
+</section>
+
+<!-- ═══ VIDEO DEMO ═══ -->
+<section class="section" id="demo">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label">See It In Action</div>
+    <div class="section-title">Watch the Demo</div>
+    <div class="section-desc" style="margin:0 auto 32px">
+      See how Material List works — from capturing prices to generating a professional estimate in seconds.
+    </div>
+
+    <!-- ════════════════════════════════════════════════════
+         PARA AGREGAR TU VIDEO:
+         1. Sube el video a YouTube
+         2. Copia el ID del video (lo que viene después de ?v= en el link)
+            Ejemplo: https://youtube.com/watch?v=ABC123xyz  →  ID = ABC123xyz
+         3. Reemplaza  TU_VIDEO_ID_AQUI  por ese ID en la línea del iframe
+         ════════════════════════════════════════════════════ -->
+    <div style="max-width:860px;margin:0 auto;position:relative">
+      <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#0f172a">
+
+        <!-- ── Cuando tengas el ID, reemplaza TU_VIDEO_ID_AQUI ── -->
+        <iframe id="demoVideo"
+          src="https://www.youtube.com/embed/X6qStvUne9w?rel=0&modestbranding=1&color=white"
+          title="Material List Demo"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+          style="position:absolute;top:0;left:0;width:100%;height:100%;border-radius:16px;display:none">
+        </iframe>
+
+        <!-- Placeholder visible hasta que pongas el ID real -->
+        <div id="demoPlaceholder" style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:rgba(15,23,42,0.8)">
+          <div style="width:72px;height:72px;background:rgba(245,158,11,0.15);border:2px solid rgba(245,158,11,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px">&#9654;</div>
+          <div style="font-size:15px;color:var(--text-secondary)">Demo video — coming soon</div>
+          <div style="font-size:12px;color:var(--text-muted)">Reemplaza TU_VIDEO_ID_AQUI en el HTML con el ID de tu video de YouTube</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section class="section pricing-section" id="pricing">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label">Pricing</div>
+    <div class="section-title">Simple, Transparent Pricing</div>
+    <div class="section-desc" style="margin:0 auto 16px">Start with a 30-day free trial. No credit card required.</div>
+
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Monthly</div>
+        <div class="pricing-price">$8.99</div>
+        <div class="pricing-period">per month</div>
+        <div class="pricing-equiv">&nbsp;</div>
+        <!-- TODO: Replace # with Chrome Web Store link -->
+        <a href="#" class="pricing-btn pricing-btn-outline">Get Started</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-name">Quarterly</div>
+        <div class="pricing-price">$19.99</div>
+        <div class="pricing-period">every 3 months</div>
+        <div class="pricing-equiv">~$6.66/month — Save 26%</div>
+        <!-- TODO: Replace # with Chrome Web Store link -->
+        <a href="#" class="pricing-btn pricing-btn-primary">Get Started</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Annual</div>
+        <div class="pricing-price">$59.99</div>
+        <div class="pricing-period">per year</div>
+        <div class="pricing-equiv">~$5.00/month — Best Value</div>
+        <!-- TODO: Replace # with Chrome Web Store link -->
+        <a href="#" class="pricing-btn pricing-btn-outline">Get Started</a>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;font-size:13px;color:var(--text-muted)">
+      Free plan available: 1 estimate and 1 template per day &middot; All plans include a 30-day free Pro trial
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DISCOUNT CODES ═══ -->
+<!-- ════════════════════════════════════════════════════════════
+     SECCIÓN DE CÓDIGOS DE DESCUENTO
+     Para agregar / quitar códigos:
+       - Copia o elimina un bloque <div class="discount-card"> completo
+       - Cambia el texto dentro de <div class="discount-code"> por tu código
+       - Cambia la descripción en <div class="discount-desc">
+     NOTA: No hay links de pago aquí. El botón instalar redirige al Chrome Web Store.
+     ════════════════════════════════════════════════════════════ -->
+<section class="section discount-section" id="descuentos">
+  <div class="section-inner" style="text-align:center">
+    <div class="section-label">Exclusive Offers</div>
+    <div class="section-title">Discount Codes</div>
+    <div class="section-desc" style="margin:0 auto 8px">
+      Copy your code below and use it when upgrading inside the extension after installation.
+    </div>
+    <p style="font-size:13px;color:var(--text-muted);max-width:500px;margin:0 auto 8px">
+      Install the extension free from the Chrome Web Store, then enter your code in the billing screen to redeem your discount.
+    </p>
+
+    <div class="discount-grid">
+
+      <!-- ── CÓDIGO 1 ── Cambia el código y la descripción -->
+      <div class="discount-card">
+        <div class="discount-label">Launch Offer</div>
+        <div class="discount-code" onclick="copyCode(this)" title="Click to copy">LAUNCH30</div>
+        <div class="discount-desc">30% off your first month on any plan</div>
+        <div class="discount-copy-hint">&#128203; Click the code to copy</div>
+      </div>
+
+      <!-- ── CÓDIGO 2 ── Cambia el código y la descripción -->
+      <div class="discount-card">
+        <div class="discount-label">Annual Deal</div>
+        <div class="discount-code" onclick="copyCode(this)" title="Click to copy">YEARLY20</div>
+        <div class="discount-desc">20% off any annual subscription</div>
+        <div class="discount-copy-hint">&#128203; Click the code to copy</div>
+      </div>
+
+      <!-- ── CÓDIGO 3 ── Cambia el código o elimina este bloque si no lo necesitas -->
+      <div class="discount-card">
+        <div class="discount-label">Friends &amp; Family</div>
+        <div class="discount-code" onclick="copyCode(this)" title="Click to copy">FRIEND15</div>
+        <div class="discount-desc">15% off — share with a colleague</div>
+        <div class="discount-copy-hint">&#128203; Click the code to copy</div>
+      </div>
+
+    </div>
+
+    <div style="margin-top:36px">
+      <!-- TODO: Reemplaza # con tu link del Chrome Web Store -->
+      <a href="#" class="btn-primary">Install Free on Chrome Web Store &#8599;</a>
+    </div>
+    <p style="margin-top:12px;font-size:12px;color:var(--text-muted)">
+      No payment required to install &middot; Codes apply inside the extension
+    </p>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section class="section" id="contact">
+  <div class="section-inner">
+    <div class="section-label">Get in Touch</div>
+    <div class="section-title">Contact Us</div>
+    <div class="section-desc">Have questions about Material List or need support? We'd love to hear from you.</div>
+
+    <div class="contact-grid">
+      <form class="contact-form" id="contact-form" onsubmit="handleContact(event)">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input class="form-input" type="text" name="name" placeholder="Your full name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" name="email" placeholder="you@company.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company</label>
+          <input class="form-input" type="text" name="company" placeholder="Your company (optional)">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" name="message" placeholder="How can we help?" required></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Message</button>
+      </form>
+      <div>
+        <div class="contact-info-card">
+          <div class="contact-info-title">Contact Information</div>
+          <div class="contact-info-item">
+            <span class="contact-info-icon">&#9993;</span>
+            info@gadget4home.com
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-icon">&#128232;</span>
+            support@gadget4home.com
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-icon">&#127968;</span>
+            Gadget 4 Home LLC
+          </div>
+          <div class="contact-info-item">
+            <span class="contact-info-icon">&#127758;</span>
+            United States
+          </div>
+        </div>
+        <div class="contact-info-card">
+          <div class="contact-info-title">Support</div>
+          <div style="font-size:14px;color:var(--text-secondary);line-height:1.7">
+            For extension support, bug reports, or feature requests, email us at support@gadget4home.com. We typically respond within 24 hours.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- end main-content -->
+
+<!-- ═══ PRIVACY POLICY ═══ -->
+<div class="legal-page" id="privacy-page">
+  <div class="legal-content">
+    <a href="#" class="legal-back" onclick="showMain()">&#8592; Back to Home</a>
+    <h1>Privacy Policy</h1>
+    <div class="legal-date">Last updated: April 2026</div>
+
+    <h2>1. Identity</h2>
+    <p>This service is operated by Gadget 4 Home LLC, a company registered in the United States.</p>
+
+    <h2>2. Data We Collect</h2>
+    <p>We only collect your email address for authentication (login) purposes and to secure your account.</p>
+    <p>When you click the extension button on a supported retailer page, the extension reads product details (name, price, SKU, and image) directly from that page to add items to your estimate. This happens only when you explicitly trigger it — no browsing activity is collected passively.</p>
+    <p>If you use the right-click context menu feature, the selected text and current page URL are used to create a product entry in your estimate. This data is stored locally on your device and is never transmitted without your action.</p>
+    <p>We do not collect, store, or have access to your passwords, browsing history, or personal data from websites you visit.</p>
+
+    <h2>3. Local &amp; Cloud Storage</h2>
+    <p>Your data — including estimates, material lists, client information, company logo, and settings — is first stored locally on your device using Chrome's secure built-in storage. If you are logged in, this data is also backed up to Supabase (hosted on AWS) with Row Level Security (RLS) enabled, ensuring that only you can access your own data. All data transmission is encrypted using HTTPS/TLS.</p>
+
+    <h2>4. AI Privacy</h2>
+    <p>Material List does not process your data with internal AI. The extension provides a pre-built prompt that you can send to your own ChatGPT account by opening a new browser tab. Your interaction with OpenAI remains entirely private and under your control. We do not store, transmit, or have access to the AI's responses.</p>
+
+    <h2>5. No Data Sharing</h2>
+    <p>We do not sell, distribute, or share your data with third parties for any purpose. Your business information remains yours.</p>
+
+    <h2>6. Payment Processing</h2>
+    <p>Subscription payments are handled securely by Stripe. We do not collect, store, or have access to your credit card or payment information.</p>
+
+    <h2>7. Data Deletion</h2>
+    <p>You may request deletion of your account and all associated data at any time by contacting support@gadget4home.com. We will permanently delete all your data within 30 days of your request.</p>
+
+    <h2>8. Third-Party Services</h2>
+    <p>The following services are used to operate Material List:</p>
+    <ul>
+      <li><strong>Supabase</strong> — Authentication and encrypted cloud data storage</li>
+      <li><strong>Stripe</strong> — Secure payment processing</li>
+      <li><strong>Google Chrome Web Store</strong> — Extension distribution</li>
+      <li><strong>OpenAI / ChatGPT</strong> — Optional AI prompts (user-initiated, not automated)</li>
+    </ul>
+
+    <h2>9. Changes to This Policy</h2>
+    <p>We may update this Privacy Policy from time to time. Changes will be posted on this page with an updated date. Continued use of Material List after changes constitutes acceptance of the updated policy.</p>
+
+    <h2>10. Contact</h2>
+    <p>For questions about this Privacy Policy:</p>
+    <p>support@gadget4home.com<br>gadget4home.com</p>
+  </div>
+</div>
+
+<!-- ═══ TERMS OF SERVICE ═══ -->
+<div class="legal-page" id="terms-page">
+  <div class="legal-content">
+    <a href="#" class="legal-back" onclick="showMain()">&#8592; Back to Home</a>
+    <h1>Terms of Service</h1>
+    <div class="legal-date">Last updated: March 2026</div>
+
+    <h2>1. Purpose</h2>
+    <p>Material List is a productivity tool designed to facilitate the creation of estimates, invoices, and material management for contractors, electricians, plumbers, and resellers. The extension is provided by Gadget 4 Home LLC.</p>
+
+    <h2>2. User Responsibility</h2>
+    <p>You have full control over the prices captured from third-party websites and the application of Mark-up, Margin, and Taxes. Gadget 4 Home LLC is not responsible for errors in the calculations of your final budgets, estimates, or invoices. You are solely responsible for verifying the accuracy of all documents generated by Material List.</p>
+
+    <h2>3. AI-Generated Content</h2>
+    <p>Labor cost suggestions generated via AI are estimates only and should not be used as final pricing without professional validation. The user is responsible for verifying all AI-generated labor cost estimates before presenting them to clients.</p>
+
+    <h2>4. Free Plan</h2>
+    <p>The free version of Material List is limited to one (1) estimate and one (1) template per day. Users who wish to access unlimited features may upgrade to a Pro plan.</p>
+
+    <h2>5. Free Trial</h2>
+    <p>New users receive a 30-day free trial with full Pro features. No credit card is required for the trial. After the trial expires, the account reverts to the Free plan unless upgraded.</p>
+
+    <h2>6. User Content</h2>
+    <p>You retain all rights over the logos, client information, and business data that you upload to Material List. We do not claim ownership of any content you create or store within the extension.</p>
+
+    <h2>7. Limitation of Liability</h2>
+    <p>Material List is provided "as is" without warranty of any kind. Gadget 4 Home LLC shall not be liable for any damages arising from the use of this software, including but not limited to errors in pricing, calculations, or AI-generated content.</p>
+
+    <h2>8. Termination</h2>
+    <p>We reserve the right to suspend or terminate accounts that violate these terms or engage in fraudulent activity.</p>
+
+    <h2>9. Changes to Terms</h2>
+    <p>We may update these Terms of Service at any time. Continued use of Material List constitutes acceptance of updated terms.</p>
+
+    <h2>10. Contact</h2>
+    <p>For questions: support@gadget4home.com</p>
+  </div>
+</div>
+
+<!-- ═══ REFUND POLICY ═══ -->
+<div class="legal-page" id="refund-page">
+  <div class="legal-content">
+    <a href="#" class="legal-back" onclick="showMain()">&#8592; Back to Home</a>
+    <h1>Refund &amp; Subscription Policy</h1>
+    <div class="legal-date">Last updated: March 2026</div>
+
+    <h2>1. Pro Subscription Plans</h2>
+    <p>Material List offers three Pro subscription tiers:</p>
+    <ul>
+      <li><strong>Monthly:</strong> $8.99/month</li>
+      <li><strong>Quarterly:</strong> $19.99 every 3 months</li>
+      <li><strong>Annual:</strong> $59.99/year</li>
+    </ul>
+
+    <h2>2. Non-Refundable</h2>
+    <p>As Material List is a digital product with immediate access upon payment, subscriptions are non-refundable. We encourage users to take advantage of the free 30-day trial to evaluate the product before subscribing.</p>
+
+    <h2>3. Technical Compensation</h2>
+    <p>In the event of system failures or technical issues that prevent you from using Material List, we reserve the right to grant additional days of Pro subscription as courtesy compensation.</p>
+
+    <h2>4. Cancellation</h2>
+    <p>You may cancel your subscription at any time from your settings panel within the extension. Cancellation takes effect at the end of your current billing cycle. You will continue to have Pro access until the end of the period you have already paid for.</p>
+
+    <h2>5. Contact</h2>
+    <p>For billing inquiries or cancellation assistance: support@gadget4home.com</p>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">
+        <img src="assets/icon/LOGO.png" alt="Gadget 4 Home icon"
+             style="width:24px;height:24px;object-fit:cover;border-radius:6px;vertical-align:middle;margin-right:8px"
+             onerror="this.style.display='none'">Gadget 4 Home
+      </div>
+      <div class="footer-desc">Digital solutions for modern contractors. Material List: Easy Estimates &amp; Invoices. Based in the United States.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Product</div>
+      <a href="#extension" class="footer-link" onclick="showMain()">Material List Extension</a>
+      <a href="#pricing" class="footer-link" onclick="showMain()">Pricing</a>
+      <!-- TODO: Replace # with Chrome Web Store link when approved -->
+      <a href="#" class="footer-link">Chrome Web Store</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Legal</div>
+      <a href="#" class="footer-link" onclick="showLegal('privacy')">Privacy Policy</a>
+      <a href="#" class="footer-link" onclick="showLegal('terms')">Terms of Service</a>
+      <a href="#" class="footer-link" onclick="showLegal('refund')">Refund Policy</a>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <a href="mailto:info@gadget4home.com" class="footer-link">info@gadget4home.com</a>
+      <a href="mailto:support@gadget4home.com" class="footer-link">support@gadget4home.com</a>
+      <a href="#contact" class="footer-link" onclick="showMain()">Contact Form</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2026 Gadget 4 Home LLC. All rights reserved.</div>
+    <div class="footer-affiliate">Affiliate Disclosure: Material List: Easy Estimates & Invoices may contain affiliate links. We may receive a commission for purchases made through these links at third-party stores, at no additional cost to you. This helps us keep the tool updated and maintained. Gadget 4 Home LLC is a participant in the Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising</div>
+  </div>
+</footer>
+
+<script>
+// ── Navigation scroll effect ──
+window.addEventListener('scroll', function() {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+});
+
+// ── Fade-in on scroll ──
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
+
+// ── Legal page routing ──
+function showLegal(page) {
+  document.getElementById('main-content').style.display = 'none';
+  document.querySelectorAll('.legal-page').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById(page + '-page').classList.add('active');
+  window.scrollTo(0, 0);
+}
+function showMain() {
+  document.querySelectorAll('.legal-page').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('main-content').style.display = 'block';
+}
+
+// ── Contact form ──
+function handleContact(e) {
+  e.preventDefault();
+  var form = e.target;
+  var name = form.querySelector('[name="name"]').value;
+  var email = form.querySelector('[name="email"]').value;
+  var company = form.querySelector('[name="company"]').value;
+  var message = form.querySelector('[name="message"]').value;
+  var subject = encodeURIComponent('Contact from ' + name + (company ? ' (' + company + ')' : ''));
+  var body = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nCompany: ' + (company || 'N/A') + '\n\nMessage:\n' + message);
+  window.location.href = 'mailto:support@gadget4home.com?subject=' + subject + '&body=' + body;
+  form.reset();
+}
+
+// ── Mobile menu ──
+function toggleMobile() {
+  var links = document.querySelector('.nav-links');
+  if (links.style.display === 'flex') {
+    links.style.display = 'none';
+  } else {
+    links.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(2,6,23,0.95);backdrop-filter:blur(20px);padding:20px 24px;gap:16px;border-bottom:1px solid rgba(255,255,255,0.08);';
+  }
+}
+
+// ── Handle direct legal page links (e.g., /privacy, /terms) ──
+(function() {
+  var hash = window.location.hash;
+  if (hash === '#privacy') showLegal('privacy');
+  else if (hash === '#terms') showLegal('terms');
+  else if (hash === '#refund') showLegal('refund');
+})();
+
+// ── Activar video si ya tiene ID real ──
+(function() {
+  var iframe = document.getElementById('demoVideo');
+  var placeholder = document.getElementById('demoPlaceholder');
+  if (iframe && !iframe.src.includes('TU_VIDEO_ID_AQUI')) {
+    iframe.style.display = 'block';
+    if (placeholder) placeholder.style.display = 'none';
+  }
+})();
+
+// ── Carrusel de screenshots ──
+var _carouselIdx = 0;
+var _carouselTotal = 3;
+function carouselGoTo(idx) {
+  _carouselIdx = idx;
+  var track = document.getElementById('carouselTrack');
+  if (track) {
+    track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+  }
+  document.querySelectorAll('.carousel-dot').forEach(function(d, i) {
+    d.classList.toggle('active', i === idx);
+  });
+}
+function carouselNext() {
+  carouselGoTo((_carouselIdx + 1) % _carouselTotal);
+}
+function carouselPrev() {
+  carouselGoTo((_carouselIdx - 1 + _carouselTotal) % _carouselTotal);
+}
+// Auto-avance cada 5 segundos
+setInterval(function() { carouselNext(); }, 5000);
+
+// ── Copiar código de descuento ──
+function copyCode(el) {
+  var code = el.textContent.trim();
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(code).then(function() {
+      var original = el.textContent;
+      el.textContent = 'Copied!';
+      el.classList.add('discount-copied');
+      setTimeout(function() {
+        el.textContent = original;
+        el.classList.remove('discount-copied');
+      }, 1800);
+    });
+  }
+}
+</script>
+</body>
+</html>
